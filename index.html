@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Style.css" />
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        color: #222;
+        font-family: "Helvetica Neue", sans-serif;
+        font-weight: 200;
+        margin: 0 50px;
+      }
+
+      .react-draggable,
+      .cursor {
+        cursor: move;
+      }
+      .no-cursor {
+        cursor: auto;
+      }
+      .cursor-y {
+        cursor: ns-resize;
+      }
+      .cursor-x {
+        cursor: ew-resize;
+      }
+
+      .react-draggable strong {
+        background: #ddd;
+        border: 1px solid #999;
+        border-radius: 3px;
+        display: block;
+        margin-bottom: 10px;
+        padding: 3px 5px;
+        text-align: center;
+      }
+
+      .box {
+        background: #fff;
+        border: 1px solid #999;
+        border-radius: 3px;
+        width: 180px;
+        height: 180px;
+        margin: 10px;
+        padding: 10px;
+        float: left;
+      }
+
+      #circle {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        background: #ff705a;
+        cursor: -webkit-grab;
+      }
+
+      #circle2 {
+        flex-direction: column;
+        top: 400px;
+        left: 400px;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        background: #ff705a;
+        cursor: -webkit-grab;
+      }
+      .centeredX1 {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+      }
+
+      .centeredX2 {
+        position: absolute;
+        top: 50%;
+        left: 25%;
+      }
+
+      input {
+        outline: none;
+        background: 0 0;
+        width: 60px;
+        margin: 8px;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid #071a39;
+      }
+      /*
+         * RemWrapper needs to take it's styles from this element,
+         * and this element can't have an absolute position after it's kicked in.
+         * AFAIK it's not possible to do this directly in the RemWrapper component.
+         */
+      .rem-position-fix {
+        position: static !important;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-draggable@4.4.3/build/web/react-draggable.min.js"></script>
+    <script src="//unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script src="Vev.js"></script>
+
+    <script type="text/babel" src="app.js"></script>
+  </body>
+</html>
