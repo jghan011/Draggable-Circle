@@ -13,26 +13,6 @@ class App extends React.Component {
     },
   }; //these states keep track of each time you move so after you move itx and y change
 
-  handleDragCircleOne = (e, ui) => {
-    const { x, y } = this.state.circleOne;
-    this.setState({
-      circleOne: {
-        x: x + ui.deltaX,
-        y: y + ui.deltaY,
-      },
-    });
-  };
-
-  handleDragCircleTwo = (e, ui) => {
-    const { x, y } = this.state.circleTwo;
-    this.setState({
-      circleTwo: {
-        x: x + ui.deltaX,
-        y: y + ui.deltaY,
-      },
-    });
-  };
-
   handleCircleOneChange = (event, cardinalDirection) => {
     console.log(event);
     let input = event.target.value;
@@ -68,10 +48,10 @@ class App extends React.Component {
   };
 
   onControlledDrag = (e, position, circle) => {
-    const { x, y } = position;
+    const { x, y } = position; //circle: 'circleOne' | 'circleTwo'
     this.setState((state) => ({
       ...state,
-      [circle]: { x, y },
+      [circle]: { x, y }, // circleOne: {x: 4, y: 96}
     }));
   };
 
@@ -80,13 +60,13 @@ class App extends React.Component {
     this.onStop();
   };
 
-  createLine(x1, y1, x2, y2) {
+  createLine = (x1, y1, x2, y2) => {
     // the distance between the tow points(for the line div width)
-    distance = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    const distance = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
     // the mid-point between the two points, we use it as rotation center
-    xMid = (x1 + x2) / 2;
-    yMid = (y1 + y2) / 2;
+    const xMid = (x1 + x2) / 2;
+    const yMid = (y1 + y2) / 2;
 
     //get the salop of the line between the two points
 
@@ -95,19 +75,23 @@ class App extends React.Component {
 
     //Change the css of the line
 
-    const line = {
+    return {
       width: distance + "px",
       top: yMid + "px",
       left: xMid - distance / 2 + "px",
       transform: "rotate(" + slopeInDegree + "deg)",
     };
-  }
+  };
 
   render() {
     const { circleOne } = this.state;
     const { circleTwo } = this.state;
-    // console.log(circleOne);
-    // console.log(circleTwo);
+
+    // create line styles
+    const lineStyles = this.createLine(15, 44, 100, 100);
+
+    console.log({ lineStyles });
+
     const draggableProps = { onStart: this.onStart, onStop: this.onStop };
     const { x: circleOneX, y: circleOneY } = this.state.circleOne;
     const { x: circleTwoX, y: circleTwoY } = this.state.circleTwo;
@@ -175,11 +159,7 @@ class App extends React.Component {
             </div>
           </div>
         </Draggable>
-        <Draggable onDrag={this.handleDrag}>
-          <div className="drag-box">
-            <div>I am ready to be Dragged!!!</div>
-          </div>
-        </Draggable>
+        <div style={lineStyles}></div>
       </div>
     );
   }
